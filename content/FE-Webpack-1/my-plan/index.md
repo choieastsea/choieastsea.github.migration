@@ -1,7 +1,7 @@
 ---
 emoji: 🙄
 title: (2022) My Plan in 2022
-date: '2022-01-18 00:00:00'
+date: '2021-01-18 00:00:00'
 author: choieastsea
 tags: Programmer Developer 
 categories: blog
