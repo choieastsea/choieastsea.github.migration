@@ -4,7 +4,7 @@ title: (2022) My Plan in 2022
 date: '2022-01-18 00:00:00'
 author: choieastsea
 tags: Programmer Developer 
-categories: blog
+categories: 블로그
 ---
 
 드디어 블로그의 자잘한 오류들을 해결하였다. 사실 제대로 해결하지 못하여 다시 깃허브 저장소를 만들어서 클론해왔다(package-lock.json의 버전 충돌을 해결하라해서 했는데도 왜 해결이 안되는 거죠 ㅠ)... 깃허브에서 토큰으로 인증하여 저장소에 접근하는 것도 이번에 처음으로 해봤다. 앞으로 정기적으로 업데이트 체크를 해서 블로그 업로드가 먹통이 되는 일이 없도록 해야겠다.
