@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-templates-category-template-js",
+    "path": "/posts/ADsP",
+    "result": {"pageContext":{"currentCategory":"ADsP","categories":["All","ADsP","블로그","FE","Algorithms","blog"],"edges":[{"node":{"id":"e3d064b4-5905-5b17-b83d-69bf31d5654b","excerpt":"(ADsP) 1과목(데이터 이해) 1장. 데이터의 이해 본 글은 본인이 ‘데이터 분석 준전문가’ 필기 시험을 준비하면서 개인적으로 작성하는 글이라 일부 이해가 되지 않고 부정확할 수 있음을 밝힙니다. 모두 화이팅^^ 데이터와 정보 데이터란 정의 객관적인 사실을 의미한다.(존재적 특성) 정보의 근거로 쓰인다.(당위적 특성) 유형 정성적 데이터 vs 정량적 데이터 : 집합으로 표현가능한지x/o (명확한지x/o) 정형 데이터, 비정형 데이터, 반정형 데이터 (정형 데이터) : csv, 관계형 DB의 table → 틀O, 연산O (반정형) : json, XML → 틀O, 연산X (비정형) : img, video… → 틀X, 연산X SECI model(암묵지와 형식지의 상호작용) 좌상단은 암묵지, 우하단은 형식지를 배치한다. 좌상단부터  SECI를 시계방향으로 작성해주면 완성 ↗ 암묵지 암묵지 ↘ 암묵지 Socialization(공통화) Externalization(표출화) 형식지 암묵지 …","fields":{"slug":"/ADsP-1-(1)/"},"frontmatter":{"categories":"ADsP","title":"(ADsP) 1과목(데이터 이해) 1장. 데이터의 이해","date":"January 26, 2022"}},"next":{"fields":{"slug":"/my-plan/"}},"previous":null}]}},
+    "staticQueryHashes": ["1073350324","1956554647","2938748437"]}
