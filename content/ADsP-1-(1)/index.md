@@ -7,10 +7,6 @@ tags: ADsp, 데이터분석준전문가, 빅데이터, 통계
 categories: ADsP
 ---
 
-
-
-# (ADsP) 1과목(데이터 이해) 1장. 데이터의 이해
-
 본 글은 본인이 '데이터 분석 준전문가' 필기 시험을 준비하면서 개인적으로 작성하는 글이라 일부 이해가 되지 않고 부정확할 수 있음을 밝힙니다. 모두 화이팅^^
 
 ## 데이터와 정보
@@ -28,8 +24,8 @@ categories: ADsP
    - 정성적 데이터 vs 정량적 데이터 : 집합으로 표현가능한지x/o (명확한지x/o)
    - 정형 데이터, 비정형 데이터, 반정형 데이터
      - `structured data`(정형 데이터) : csv, 관계형 DB의 table → 틀O, 연산O
-     - `semi-structured`(반정형) : json, XML → 틀O, 연산X
-     - `unstructured`(비정형) : img, video... → 틀X, 연산X
+     - `semi-structured`(반정형) : json, XML, 센서 데이터 → 틀O, 연산X
+     - `unstructured`(비정형) : img, video, 댓글... → 틀X, 연산X
 
 ### SECI model(암묵지와 형식지의 상호작용)
 
@@ -84,10 +80,10 @@ data에서 wisdom으로 가는 **계층**을 표현한 피라미드
 - EAI(Enterprise Application Integration): 기업의 여러 서비스를 중앙에서 관리하여 각 서비스간 연결 루트를 간소화
 - KMS(Knowledge Management System, 지식 경영 시스템): 문제해결을 위해 기업이 보유할 수 있는 모든 지식을 통합
 - ERP(Enterprise Resource Planning, 경영 자원 통합 관리): 여러 자원 및 업무가 하나로 통합된 시스템으로 재구축하여 업무 효율성 상승
-- BI(Business Intelligence): 기업의 의사결정 프로세스. 경영자가 올바른 의사결정을 내릴 수 있도록 기업의 데이터를 분석하는 것이 목적 
+- BI(Business Intelligence): 기업의 의사결정 프로세스. 경영자가 올바른 의사결정을 내릴 수 있도록 기업의 데이터를 분석하는 것이 목적. 데이터를 정리하여 필요로 하는 정보를 정확한 시간에 제공할 수 있는 환경으로 보기도 함
 - RTE(Real Time Enterprise); 기업의 정보를 실시간으로 통합 및 전달하여 신속한 대응하도록 함
-- DM(Data Mart) :
-- DW(Data Warehouse) : 
+- DW(Data Warehouse) : 분산된 환경에 흩어진 데이터를 **총체적인 관점**에서 공통의 형식으로 변환해 관리하는 역할
+- DM(Data Mart) : DW로부터 추출된 작은 DB로 **특정 목표**를 달성하는데 필요한 데이터 제공하는 역할
 
 ### '사회 기반 구조'로서의 DB
 
@@ -108,5 +104,12 @@ data에서 wisdom으로 가는 **계층**을 표현한 피라미드
 | RDB   | 행과 열로 이뤄진 테이블에 데이터 저장.<br />하나의 열은 하나의 속성을 나타내고 같은 속성의 값만 가질 수 있음<br />구조적으로 엑셀과 유사, 정형 데이터를 다루는데 특화 | Oracle,MySQL,MS-SQL,SQLite(open source), MariaDB,<br />Oracle, DB2·Infomix는 객체관계형DB로 오늘날 많은 RDB는 Object Oriented 지원 |
 | NoSQL | Not only SQL, Non SQL, Non-relational. 비관계형을 의미<br />RDB의 SQL을 보완 및 개선한 비관계형 DB<br />비정형, 대용량 데이터 분석 및 분산처리에 용이 | - Document-Oriented : CouchDB, MongoDB...<br />- Key-value DB: Dynamo(Amazon), Redis, Riak...<br />- Column-oriented DB : Bigtable(Google), Cassandra ... |
 
- 1과목은 많은 용어를 익히는데에 집중하도록 하자!
++DBMS의 종류
+
+- 계층형 DBMS : 부모자식 관계, 데이터 중복 문제가 발생하기 쉽다
+- 네트워크형 DBMS : 그물 형태, 중복 문제는 없으나 구조 복잡
+- 분산형 DBMS : 분산된 여러개를 하나의 DB로 인식
+- 객체지향 DBMS : 복잡한 비정형 데이터라도 원하는 방식으로 표현가능
+
+1과목은 많은 용어를 익히는데에 집중하도록 하자!
 

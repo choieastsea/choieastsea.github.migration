@@ -18,4 +18,4 @@ main.ts에서 프로젝트가 시작한다.
 
 @controller는 url에 대한 것을 처리한다 express의 router라고 볼 수 있다. app.get와 비슷
 
-@service
+@service에서 business logic을 담당한다
