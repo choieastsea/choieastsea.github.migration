@@ -142,13 +142,13 @@ sum, mean, median, var(표본 분산), sd(표본 표준편차), max, min, range(
 
   subset(data, 조건) : 조건에 맞는 데이터 추출, merge(data1, data2, by=열/행) : 특정 열 또는 행 기준으로 두 데이터 합병, apply(data,1 또는 2, 함수) : 1이면 행. 2면 열에 각 함수를 적용 
 
-  
-
 - 정규 분포 : default는 표준정규분포
 
   rnorm(m, sd, n) : n개 표본 추출
+  
+- 표본 추출
 
-
+  runif(n, min, max): 난수 추출, sample( data, n) : 표본 추출
 
 # 데이터 마트
 
