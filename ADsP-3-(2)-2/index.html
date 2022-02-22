@@ -84,19 +84,19 @@
 <tbody>
 <tr>
 <td>선형성</td>
-<td>- 독립변수와 종속변수가 선형적이여야 한다<br />- 예외적으로 2차함수 회귀선을 갖는 다항회귀분석에는 선형성을 갖지 않아도 된다<br />- 산점도를 통해 분석하기 전에 변수 사이의 관계를 짐작할 수 있어 회귀분석 하기 전 상관분석은 거의 필수적으로 함께 따라온다</td>
+<td>- <strong>독립변수와 종속변수가 선형적</strong>이여야 한다<br />- 예외적으로 2차함수 회귀선을 갖는 다항회귀분석에는 선형성을 갖지 않아도 된다<br />- 산점도를 통해 분석하기 전에 변수 사이의 관계를 짐작할 수 있어 회귀분석 하기 전 상관분석은 거의 필수적으로 함께 따라온다</td>
 </tr>
 <tr>
 <td>독립성</td>
-<td>- 단순회귀분석에서는 잔차와 독립변수의 값이 서로 독립이여야 한다<br />- 독립변수가 여러 개인 다중회귀분석의 경우에는 독립변수들 간에 상관성이 없이 독립이어야 한다<br />- 만약 독립변수들 간에 상관성이 존재하는 경우 다중공선성이라 하며, 이를 제거하고 회귀분석을 수행해야 한다</td>
+<td>- 단순회귀분석에서는 <strong>잔차와 <u>독립변수</u>의 값이 서로 독립</strong>이여야 한다<br />- 독립변수가 여러 개인 <u>다중회귀분석의 경우에는 독립변수들 간에 상관성이 없이 독립이어야 한</u>다<br />- 만약 독립변수들 간에 상관성이 존재하는 경우 다중공선성이라 하며, 이를 제거하고 회귀분석을 수행해야 한다</td>
 </tr>
 <tr>
 <td>등분산성</td>
-<td>- 분산이 같다는 의미(잔차들이 고르게 분포하고 있다는 의미)<br />- 잔차의 중심에서 분산이 같아야 한다. 등분산성을 만족하지 못하면 회귀선은 어떤 추세를 띠지 못하고 덩어리진 모양을 한다</td>
+<td>- 분산이 같다는 의미(잔차들이 고르게 분포하고 있다는 의미)<br />- <strong>잔차의 중심에서 분산이 같아야 한다</strong>. 등분산성을 만족하지 못하면 회귀선은 어떤 추세를 띠지 못하고 덩어리진 모양을 한다</td>
 </tr>
 <tr>
 <td>정규성</td>
-<td>- 잔차항이 정규분포 형태를 띠는 것을 정규성을 만족한다고 한다<br />- Q-Q Plot에서 잔차가 오른쪽으로 상승하는 형태를 띠면 정규성을 만족한다고 판단한다</td>
+<td>- <strong>잔차항이 정규분포 형태를 띠는 것</strong>을 정규성을 만족한다고 한다<br />- Q-Q Plot에서 잔차가 오른쪽으로 상승하는 형태를 띠면 정규성을 만족한다고 판단한다</td>
 </tr>
 </tbody>
 </table>
@@ -237,7 +237,7 @@ Residuals <span class="token number">30</span> <span class="token number">30.358
 Signif. codes<span class="token operator">:</span>  <span class="token number">0</span> ‘<span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span>’ <span class="token number">0.001</span> ‘<span class="token operator">*</span><span class="token operator">*</span>’ <span class="token number">0.01</span> ‘<span class="token operator">*</span>’ <span class="token number">0.05</span> ‘.’ <span class="token number">0.1</span> ‘ ’ <span class="token number">1</span></code></pre></div>
 <p>위의 결과로 SSR = 68.517, SSE = 30.358이다. 따라서 R^2 = SSR/(SSR+SSE) = 0.693정도라는 것을 알 수 있다. 회귀분석의 결과와 같다는 것을 알 수 있다.</p>
 <h2 id="다중선형회귀분석" style="position:relative;"><a href="#%EB%8B%A4%EC%A4%91%EC%84%A0%ED%98%95%ED%9A%8C%EA%B7%80%EB%B6%84%EC%84%9D" aria-label="다중선형회귀분석 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>다중선형회귀분석</h2>
-<p>독립변수가 2개 이상이고 종속변수가 하나일 때 사용하는 회귀분석.</p>
+<p>독립변수가 2개 이상이고 종속변수가 하나일 때 사용하는 회귀분석. 여기서는 결정계수보다는 수정된 결정계수(Adjusted R square)가 사용된다.</p>
 <h3 id="다중공선성의-문제" style="position:relative;"><a href="#%EB%8B%A4%EC%A4%91%EA%B3%B5%EC%84%A0%EC%84%B1%EC%9D%98-%EB%AC%B8%EC%A0%9C" aria-label="다중공선성의 문제 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>다중공선성의 문제</h3>
 <p>다중선형회귀분석에는 독립변수 간 강한 상관관계가 발생하는데, 이를 <code class="language-text">다중공선성</code>이라고 부른다. (즉, 독립변수끼리 겹치는 영역이 존재한다는 말이다) 다중공선성은 회귀분석의 가정 중 하나인 <code class="language-text">독립성</code>을 위배하므로 이를 진단하고 해결해야한다.</p>
 <h3 id="다중공선성-진단" style="position:relative;"><a href="#%EB%8B%A4%EC%A4%91%EA%B3%B5%EC%84%A0%EC%84%B1-%EC%A7%84%EB%8B%A8" aria-label="다중공선성 진단 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>다중공선성 진단</h3>
@@ -391,7 +391,7 @@ Vienna            <span class="token number">911.230500</span>   <span class="to
 <p>이것을 통하여 각 도시간 거리 차이를 볼 수 있다. (단, x축과 y축이 의미하는 것은 없음)</p>
 <h2 id="주성분-분석principal-components-analysis-pca" style="position:relative;"><a href="#%EC%A3%BC%EC%84%B1%EB%B6%84-%EB%B6%84%EC%84%9Dprincipal-components-analysis-pca" aria-label="주성분 분석principal components analysis pca permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>주성분 분석(Principal Components Analysis, PCA)</h2>
 <p>서로 상관성이 높은 변수들의 <strong>선형 결합으로 새로운 변수, 즉 주성분을 만들어 기존 변수를 요약 및 축소</strong>하는 분석방법이다.</p>
-<p>데이터를 바라보는 관점은 다양하지만, 그 중 손실이 *가장 작은 축(분산이 가장 큰 축)*을 찾는 것이 주성분분석의 과정이라고 볼 수 있다.</p>
+<p>데이터를 바라보는 관점은 다양하지만, 그 중 <u>손실이 가장 작은 축(분산이 가장 큰 축)</u>을 찾는 것이 주성분분석의 과정이라고 볼 수 있다.</p>
 <h3 id="목적" style="position:relative;"><a href="#%EB%AA%A9%EC%A0%81" aria-label="목적 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>목적</h3>
 <ul>
 <li>변수를 축소하여 모형의 설명력을 높임</li>
@@ -399,9 +399,9 @@ Vienna            <span class="token number">911.230500</span>   <span class="to
 <li>군집분식 시 모형의 성능을 높임</li>
 <li>IoT 센서 데이터를 주성분분석하여 스마트팩토리에서 활용</li>
 </ul>
-<h3 id="1-prcomp" style="position:relative;"><a href="#1-prcomp" aria-label="1 prcomp permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. prcomp()</h3>
+<h3 id="1-prcomp-또는-princomp-함수로-주성분-분석" style="position:relative;"><a href="#1-prcomp-%EB%98%90%EB%8A%94-princomp-%ED%95%A8%EC%88%98%EB%A1%9C-%EC%A3%BC%EC%84%B1%EB%B6%84-%EB%B6%84%EC%84%9D" aria-label="1 prcomp 또는 princomp 함수로 주성분 분석 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. prcomp() 또는 princomp() 함수로 주성분 분석</h3>
 <p>붓꽃 예제로 해보자. 우선, 모든 PCA에서는 연속형 자료만 사용하므로 명목 척도인 5열은 제외하고 하였다.</p>
-<p>그리고 center와 scale 값을 T로 표준화하여 변수 간의 단위 차이를 없애주면서 PCA를 해주자.</p>
+<p>그리고 center와 scale 값을 <strong>T로 표준화</strong>하여 변수 간의 단위 차이를 없애주면서 PCA를 해주자.</p>
 <div class="gatsby-highlight" data-language="r"><pre class="language-r"><code class="language-r"><span class="token operator">></span> data <span class="token operator">&lt;-</span> iris<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">]</span>
 <span class="token operator">></span> result <span class="token operator">&lt;-</span> prcomp<span class="token punctuation">(</span>data<span class="token punctuation">,</span> center <span class="token operator">=</span> T<span class="token punctuation">,</span> scale. <span class="token operator">=</span> T<span class="token punctuation">)</span>
 <span class="token operator">></span> result
@@ -424,7 +424,7 @@ Standard deviation     <span class="token number">1.7084</span> <span class="tok
 Proportion of Variance <span class="token number">0.7296</span> <span class="token number">0.2285</span> <span class="token number">0.03669</span> <span class="token number">0.00518</span>	<span class="token comment"># 설명력(해당 주성분이 전체 데이터의 얼마나 설명하는지)</span>
 Cumulative Proportion  <span class="token number">0.7296</span> <span class="token number">0.9581</span> <span class="token number">0.99482</span> <span class="token number">1.00000</span>	<span class="token comment"># 누적설명력</span>
 </code></pre></div>
-<p>보면 PC1 주성분으로 전체데이터의 72.96%가 설명된다는 것을 알 수 있다. 또한, PC2까지 포함시킨다면 두개의 주성분만으로 95.8%정도를 설명할 수 있다는 것을 알 수 있다. 기존 4개의 변수에서 2개의 주성분으로 약간의 로스는 있지만 줄일 수 있다는 것을 알 수 있다.</p>
+<p>보면 PC1 주성분으로 전체데이터의 72.96%가 설명된다는 것을 알 수 있다. 또한, PC2까지 포함시킨다면 두개의 주성분만으로 95.8%정도를 설명할 수 있다는 것을 알 수 있다. 기존 4개의 변수에서 2개의 주성분으로 약간의 로스는 있지만 줄일 수 있다는 것을 알 수 있다. + 설명력이 크다는 말은 분산이 큰 축이라는 말과 같다!</p>
 <h3 id="2-scree-plot" style="position:relative;"><a href="#2-scree-plot" aria-label="2 scree plot permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. scree plot</h3>
 <p>x축을 성분의 개수, y축을 고윳값(eigenvalue)로 하는 그래프로 주성분의 개수를 선택하는데 도움을 주는 그래프이다. 그래프로 주성분의 개수를 판단하는 방법은 크게 두가지가 있다.</p>
 <ol>
@@ -540,7 +540,7 @@ Cumulative Proportion  <span class="token number">0.7296</span> <span class="tok
 <p>시계열 자료가 정상성을 만족하려면 분산이 일정해야한다. 따라서 <code class="language-text">log()</code> 함수 등을 이용하여 평균 근처에 모이도록 자료를 변환해주자.</p>
 </li>
 <li>
-<p>시차에만 의존하는 공분산</p>
+<p><strong>시차에만 의존</strong>하는 공분산</p>
 <p>공분산은 <strong>특정 시점이 아닌 시차에만 의존적</strong>이다. t는 시점, s는 시차라고 할때, ‘t시점과 t+s시점의 공분산’과 ‘t시점과 t-s시점의 공분산’은 서로 같다.</p>
 <p>공분산이 특정 시점에 의존하지 않는다는 말은 ‘t 시점과 t+s시점의 공분산’과 ‘t시점과 t-s시점의 공분산’은 서로 같다는 의미다…(?)</p>
 </li>
@@ -566,7 +566,7 @@ Cumulative Proportion  <span class="token number">0.7296</span> <span class="tok
 <h2 id="시계열-모형" style="position:relative;"><a href="#%EC%8B%9C%EA%B3%84%EC%97%B4-%EB%AA%A8%ED%98%95" aria-label="시계열 모형 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>시계열 모형</h2>
 <p>솔직하게 이부분은 이해가 잘 안된다… 추후에 다시 익히도록 하자.</p>
 <h3 id="자기회기ar-autoregressive-모형---pacf로-확인" style="position:relative;"><a href="#%EC%9E%90%EA%B8%B0%ED%9A%8C%EA%B8%B0ar-autoregressive-%EB%AA%A8%ED%98%95---pacf%EB%A1%9C-%ED%99%95%EC%9D%B8" aria-label="자기회기ar autoregressive 모형   pacf로 확인 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>자기회기(AR: AutoRegressive) 모형 -> PACF()로 확인</h3>
-<p>t라는 시점에서의 값은 이전 시점들 n개에 의해 설명될 수 있음을 의미한다. 즉, 이전 자신의 관측값이 이후 자신의 관측값에 영향을 준다는 말이다. AR모형의 상수항은 <code class="language-text">백색잡음(white noise)</code>이라고 불리며, 현재 시점과 이전 시점과의 상관관계가 존재하지 않는 독립적인 시계열자료를 의미한다.</p>
+<p>t라는 시점에서의 값은 이전 시점들 n개에 의해 설명될 수 있음을 의미한다. 즉, 이전 자신의 관측값이 이후 자신의 관측값에 영향을 준다는 말이다. AR모형의 상수항은 <code class="language-text">백색잡음(white noise)</code>이라고 불리며, 현재 시점과 이전 시점과의 상관관계가 존재하지 않는 독립적인 시계열자료를 의미한다. 이는 대표적인 시계열 자료 중 하나이다.</p>
 <h3 id="이동평균ma--moving-average-모형---acf로-확인" style="position:relative;"><a href="#%EC%9D%B4%EB%8F%99%ED%8F%89%EA%B7%A0ma--moving-average-%EB%AA%A8%ED%98%95---acf%EB%A1%9C-%ED%99%95%EC%9D%B8" aria-label="이동평균ma  moving average 모형   acf로 확인 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>이동평균(MA : Moving Average) 모형 -> ACF()로 확인</h3>
 <p>예측오차를 통하여 미래를 예측하는 모형이다. 백색잡음들의 선형결합으로 이루어져 있기에 항상 정상성을 만족한다.</p>
 <h3 id="자기회귀누적이동평균arima--autoregressive-integrated-moving-average-모형" style="position:relative;"><a href="#%EC%9E%90%EA%B8%B0%ED%9A%8C%EA%B7%80%EB%88%84%EC%A0%81%EC%9D%B4%EB%8F%99%ED%8F%89%EA%B7%A0arima--autoregressive-integrated-moving-average-%EB%AA%A8%ED%98%95" aria-label="자기회귀누적이동평균arima  autoregressive integrated moving average 모형 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>자기회귀누적이동평균(ARIMA : AutoRegressive Integrated Moving Average) 모형</h3>
