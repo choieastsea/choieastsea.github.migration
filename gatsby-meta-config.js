@@ -3,14 +3,14 @@ module.exports = {
   title: `choieastsea.github.io`,
   description: `choieastsea.github.io`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
-  siteUrl: `http://choieastsea.github.io`,
+  siteUrl: `https://choieastsea.github.io`,
   ogImage: `/og-image.png`, // Path to your in the 'static' folder
   comments: {
     utterances: {
       repo: `choieastsea/choieastsea.github.io`,
     },
   },
-  ga: '0', // Google Analytics Tracking ID
+  ga: 'UA-162999436-1', // Google Analytics Tracking ID
   author: {
     name: `choieastsea`,
     bio: {
