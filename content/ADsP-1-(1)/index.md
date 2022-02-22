@@ -51,7 +51,23 @@ data에서 wisdom으로 가는 **계층**을 표현한 피라미드
 - Knowledge : 유의미한 정보를 분류하여 내재화(형식지→암묵지)한 것
 - Wisdom : 지식의 축적과 아이디어가 결합된 창의적 산물(?ㅋㅋ)
 
+### 데이터 단위
 
+1byte = 8bit
+
+1KB = 2^10 byte
+
+...
+
+1PB = 2^10TB
+
+IEB = 2^10PB
+
+1ZB = 2^10EB
+
+1YB = 2^10ZB
+
+PEZY~
 
 ## 데이터베이스
 
@@ -77,12 +93,12 @@ data에서 wisdom으로 가는 **계층**을 표현한 피라미드
 - OLAP(Online Analytical Processing) 시스템 : 수집과 공유에서 탈피하여 **분석**이 중심이 되는 시스템, 각각의 데이터가 쌓인 전체 데이터에 초점
 - OLTP → OLAP로 전환
 - 2000년대 이후 기업의 DB는 CRM(Customer Relationship Management, 고객관계관리)과 SCM(Supply Chain Management,공급망관리)의 밀접한 관계로 변화함
-- EAI(Enterprise Application Integration): 기업의 여러 서비스를 중앙에서 관리하여 각 서비스간 연결 루트를 간소화
+- EAI(Enterprise Application Integration): 기업의 여러 서비스를 **중앙에서 관리**하여 각 서비스간 연결 루트를 간소화
 - KMS(Knowledge Management System, 지식 경영 시스템): 문제해결을 위해 기업이 보유할 수 있는 모든 지식을 통합
-- ERP(Enterprise Resource Planning, 경영 자원 통합 관리): 여러 자원 및 업무가 하나로 통합된 시스템으로 재구축하여 업무 효율성 상승
-- BI(Business Intelligence): 기업의 의사결정 프로세스. 경영자가 올바른 의사결정을 내릴 수 있도록 기업의 데이터를 분석하는 것이 목적. 데이터를 정리하여 필요로 하는 정보를 정확한 시간에 제공할 수 있는 환경으로 보기도 함
-- RTE(Real Time Enterprise); 기업의 정보를 실시간으로 통합 및 전달하여 신속한 대응하도록 함
-- DW(Data Warehouse) : 분산된 환경에 흩어진 데이터를 **총체적인 관점**에서 공통의 형식으로 변환해 관리하는 역할
+- ERP(Enterprise Resource Planning, 경영 자원 통합 관리/전사지원관리): 여러 자원 및 업무가 **하나로 통합된 시스템으로 재구축**하여 업무 효율성 상승
+- BI(Business Intelligence): **기업의 의사결정 프로세스**. 경영자가 올바른 의사결정을 내릴 수 있도록 기업의 데이터를 분석하는 것이 목적. 데이터를 정리하여 <u>필요로 하는 정보를 정확한 시간에 제공할 수 있는 환경</u>으로 보기도 함
+- RTE(Real Time Enterprise); 기업의 정보를 **실시간으**로 통합 및 전달하여 신속한 대응하도록 함
+- DW(Data Warehouse) : 분산된 환경에 흩어진 데이터를 **총체적인 관점**에서 공통의 형식으로 변환해 관리하는 역할. 데이터를 일관된 형식으로 관리
 - DM(Data Mart) : DW로부터 추출된 작은 DB로 **특정 목표**를 달성하는데 필요한 데이터 제공하는 역할
 
 ### '사회 기반 구조'로서의 DB
@@ -107,9 +123,9 @@ data에서 wisdom으로 가는 **계층**을 표현한 피라미드
 +DBMS의 종류
 
 - 계층형 DBMS : 부모자식 관계, 데이터 중복 문제가 발생하기 쉽다
-- 네트워크형 DBMS : 그물 형태, 중복 문제는 없으나 구조 복잡
+- 네트워크형 DBMS : 그물 형태, 중복 문제는 없으나 **구조 복잡**
 - 분산형 DBMS : 분산된 여러개를 하나의 DB로 인식
-- 객체지향 DBMS : 복잡한 비정형 데이터라도 원하는 방식으로 표현가능
+- 객체지향 DBMS : 복잡한 비정형 데이터라도 원하는 방식으로 표현가능 (복잡한 구조 표현 및 관리 가능)
 
 1과목은 많은 용어를 익히는데에 집중하도록 하자!
 
