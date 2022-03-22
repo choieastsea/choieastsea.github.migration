@@ -74,25 +74,25 @@
 <p>마지막으로, **a[i] = P[i] - P[i-1]**임을 알 수 있다. 외울 필요 없이 자연스럽게 알 수 있다.</p>
 <h2 id="prefix-sum-array-on-시간에-초기화-하기" style="position:relative;"><a href="#prefix-sum-array-on-%EC%8B%9C%EA%B0%84%EC%97%90-%EC%B4%88%EA%B8%B0%ED%99%94-%ED%95%98%EA%B8%B0" aria-label="prefix sum array on 시간에 초기화 하기 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>prefix sum array O(n) 시간에 초기화 하기</h2>
 <p>처음 P를 초기화 할때 나는 아래와 같이 했었다.</p>
-<div class="gatsby-highlight" data-language="c++"><pre class="language-c++"><code class="language-c++">int a[] = {1, 2, 3, 4, -5, 0, 3};
-int p[7] = {0};
-for (int i = 0; i &lt; 7; i++)
-{
-    int sumI = 0;
-    for (int j = 0; j &lt;= i; j++)
-    {
-        sumI += a[j];
-    }
-    p[i] = sumI;
-}</code></pre></div>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> p<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">7</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> sumI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        sumI <span class="token operator">+=</span> a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    p<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> sumI<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>이는 P[i]가 a[0]부터 a[i]까지 더한 값이라는 특성을 이용하여 구한 것인데, O(n^2)시간이 걸린다는 단점이 있다. 따라서 prefix sum의 특징 중 마지막 수식에서 점화식을 유도해볼 수 있다.</p>
 <p>P[i] = P[i-1] + a[i] 임을 이용하여 초기화 하는 것이다. 단, 여기서는 i가 1이상이여야 하므로 <u>배열을 1번 인덱스부터 채우는 것이 편하다</u>.</p>
-<div class="gatsby-highlight" data-language="c++"><pre class="language-c++"><code class="language-c++">int a[] = {0, 1, 2, 3, 4, -5, 0, 3};
-int p[7] = {0};
-for (int i = 1; i &lt;= 7; i++)
-{
-    p[i] = p[i - 1] + a[i];
-}</code></pre></div>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> p<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">7</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    p<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>이는 O(n)시간으로 prefix sum array를 초기화시켜줄 수 있으므로 알고 있으면 좋을 것이다!</p>
 <p>이제, prefix sum을 이용한 문제를 3개 정도 풀어보자. prefix sum을 이용하는지 판단하는 근거는 “누적합” 혹은 “연속된 구간의 합”이라고 보면 되겠다. c++ 실력이 낮아 공부하면서 풀어보았다.</p>
 <h1 id="문제-풀이" style="position:relative;"><a href="#%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4" aria-label="문제 풀이 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>문제 풀이</h1>
@@ -121,38 +121,38 @@ for (int i = 1; i &lt;= 7; i++)
 <p>n-k+1. 구간 길이 n : 1~n까지의 평균</p>
 <p>-> i. 구간 길이 i : 1<del>i까지의 평균, 2</del>i+1까지의 평균, … <strong>j ~ i+j-1</strong>까지의 평균, … n-i+1 ~ n까지의 평균</p>
 <p>코드는 다음과 같다.</p>
-<div class="gatsby-highlight" data-language="c++"><pre class="language-c++"><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;bits/stdc++.h&gt;
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
 
-using namespace std;
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
-int main()
-{
-    int n, k;
-    cin &gt;&gt; n &gt;&gt; k;
-    int *temp_arr = new int[n + 1];
-    int *P = new int[n + 1];
-    // initialize Prefix sum array
-    P[0] = 0;
-    for (int i = 1; i &lt;= n; i++)
-    {
-        cin &gt;&gt; temp_arr[i];
-        P[i] = P[i - 1] + temp_arr[i];
-    }
-    double answer = 0.0;
-    for (int i = k; i &lt;= n; i++)
-    {
-        for (int j = 1; j &lt;= n - i + 1; j++)
-        {
-            answer = max(answer, (double)(P[i + j - 1] - P[j - 1]) / (double)(i));
-        }
-    }
-    cout.precision(10);
-    cout &lt;&lt; answer &lt;&lt; endl;
-    delete[] temp_arr;
-    delete[] P;
-    return 0;
-}</code></pre></div>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">,</span> k<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> n <span class="token operator">>></span> k<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>temp_arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>P <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">// initialize Prefix sum array</span>
+    P<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        cin <span class="token operator">>></span> temp_arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        P<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> P<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> temp_arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">double</span> answer <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> k<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> n <span class="token operator">-</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            answer <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>answer<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token punctuation">(</span>P<span class="token punctuation">[</span>i <span class="token operator">+</span> j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> P<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    cout<span class="token punctuation">.</span><span class="token function">precision</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> answer <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> temp_arr<span class="token punctuation">;</span>
+    <span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> P<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>단순하게 출력하였더니 정밀도의 문제가 생겨, cout.precision(10)으로 정밀도를 높여서 하니 해결되었다.</p>
 <h2 id="codeforces-466c" style="position:relative;"><a href="#codeforces-466c" aria-label="codeforces 466c permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>codeforces 466C</h2>
 <p><a href="https://codeforces.com/contest/466/problem/C">C.Number of Ways</a></p>
@@ -174,41 +174,41 @@ int main()
 </ol>
 <p>주의할 점은 배열의 합이 0이 되는 경우가 문제가 될 수 있다. [0, 1, -1, 0]과 같이,</p>
 <p>코드는 아래와 같다. 전 문제와 다르게 동적 할당을 하면 시간이 더 오래걸리는 것 같아, 정적 배열로 선언하였다.</p>
-<div class="gatsby-highlight" data-language="c++"><pre class="language-c++"><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;bits/stdc++.h&gt;
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
 
-using namespace std;
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
-int main()
-{
-    long long n, a[500000], P[500000];
-    cin &gt;&gt; n;
-    P[0] = 0;
-    for (long long i = 1; i &lt;= n; i++)
-    {
-        cin &gt;&gt; a[i];
-        P[i] = P[i - 1] + a[i];
-    }
-    long long count = 0;
-    if (P[n] % 3 == 0)
-    {
-        long long total3 = P[n] / 3;
-        long long countOf1 = 0;
-        for (long long i = 1; i &lt; n; i++)
-        {
-            if (P[i] == 2 * total3)
-            {
-                count += countOf1;
-            }
-            if (P[i] == total3)
-            {
-                countOf1++;
-            }
-        }
-    }
-    cout &lt;&lt; count &lt;&lt; endl;
-    return 0;
-}</code></pre></div>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> n<span class="token punctuation">,</span> a<span class="token punctuation">[</span><span class="token number">500000</span><span class="token punctuation">]</span><span class="token punctuation">,</span> P<span class="token punctuation">[</span><span class="token number">500000</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
+    P<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        cin <span class="token operator">>></span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        P<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> P<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>P<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">3</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">long</span> <span class="token keyword">long</span> total3 <span class="token operator">=</span> P<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">/</span> <span class="token number">3</span><span class="token punctuation">;</span>
+        <span class="token keyword">long</span> <span class="token keyword">long</span> countOf1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>P<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">*</span> total3<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                count <span class="token operator">+=</span> countOf1<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>P<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> total3<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                countOf1<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    cout <span class="token operator">&lt;&lt;</span> count <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <h2 id="codeforces-1285b" style="position:relative;"><a href="#codeforces-1285b" aria-label="codeforces 1285b permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>codeforces 1285B</h2>
 <p><a href="https://codeforces.com/contest/1285/problem/B">B. Just Eat It!</a></p>
 <p>복잡하지만 다음과 같다.</p>
@@ -234,66 +234,66 @@ int main()
 </ol>
 <p>1번은 탐색을 2번해야하고, 2번은 한번의 탐색에 한가지 예외를 붙여주는 것이라 2번으로 구현해보았다.</p>
 <p>코드는 다음과 같다.</p>
-<div class="gatsby-highlight" data-language="c++"><pre class="language-c++"><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;bits/stdc++.h&gt;
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
 
-using namespace std;
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
-int main()
-{
-    int test_case;
-    long long n;
-    cin &gt;&gt; test_case;
-    while (test_case--)
-    {
-        cin &gt;&gt; n;
-        long long score_arr[100001];
-        long long P[100001]; // prefix sum array
-        // initialize Prefix sum array
-        P[0] = 0;
-        for (int i = 1; i &lt;= n; i++)
-        {
-            cin &gt;&gt; score_arr[i];
-            P[i] = P[i - 1] + score_arr[i];
-        }
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> test_case<span class="token punctuation">;</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> n<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> test_case<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>test_case<span class="token operator">--</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
+        <span class="token keyword">long</span> <span class="token keyword">long</span> score_arr<span class="token punctuation">[</span><span class="token number">100001</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">long</span> <span class="token keyword">long</span> P<span class="token punctuation">[</span><span class="token number">100001</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// prefix sum array</span>
+        <span class="token comment">// initialize Prefix sum array</span>
+        P<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            cin <span class="token operator">>></span> score_arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            P<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> P<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> score_arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        long long yasser_score = P[n];
-        int ans = 1;
-        long long min_of_p = 0;
-        int min_index = 0;
-        long long *Adel_comb = new long long[n + 1];
-        for (int i = 1; i &lt;= n; i++)
-        {
-            if (min_index == 0 &amp;&amp; i == n)
-            { //조각이 전체인 경우. 이 경우는 문제 조건에 의하여 불가능.
-                continue;
-            }
-            Adel_comb[i] = P[i] - min_of_p; // i에서 끝나는 조각 중 가장 합이 큰 조각의 점수
-            if (min_of_p &gt;= P[i])
-            { // 더 작은 값 있다면 업데이트
-                min_index = i;
-                min_of_p = P[i];
-            }
-            // cout &lt;&lt; i &lt;&lt; &quot;에서 끝나는 최대 조각의 합: &quot; &lt;&lt; Adel_comb[i] &lt;&lt; &quot;, yasser : &quot; &lt;&lt; yasser_score &lt;&lt; endl;
-            if (Adel_comb[i] &gt;= yasser_score)
-            {
-                ans = 0;
-                break;
-            }
-        }
-        if (ans == 1)
-        {
-            cout &lt;&lt; &quot;YES&quot; &lt;&lt; endl;
-        }
-        else
-            cout &lt;&lt; &quot;NO&quot; &lt;&lt; endl;
-    }
+        <span class="token keyword">long</span> <span class="token keyword">long</span> yasser_score <span class="token operator">=</span> P<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">long</span> <span class="token keyword">long</span> min_of_p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> min_index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token operator">*</span>Adel_comb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">[</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>min_index <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> i <span class="token operator">==</span> n<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span> <span class="token comment">//조각이 전체인 경우. 이 경우는 문제 조건에 의하여 불가능.</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            Adel_comb<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> P<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> min_of_p<span class="token punctuation">;</span> <span class="token comment">// i에서 끝나는 조각 중 가장 합이 큰 조각의 점수</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>min_of_p <span class="token operator">>=</span> P<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span> <span class="token comment">// 더 작은 값 있다면 업데이트</span>
+                min_index <span class="token operator">=</span> i<span class="token punctuation">;</span>
+                min_of_p <span class="token operator">=</span> P<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// cout &lt;&lt; i &lt;&lt; "에서 끝나는 최대 조각의 합: " &lt;&lt; Adel_comb[i] &lt;&lt; ", yasser : " &lt;&lt; yasser_score &lt;&lt; endl;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Adel_comb<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">>=</span> yasser_score<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ans <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            cout <span class="token operator">&lt;&lt;</span> <span class="token string">"YES"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+            cout <span class="token operator">&lt;&lt;</span> <span class="token string">"NO"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    return 0;
-}</code></pre></div>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>결론은 배열에서 구간의 합을 반복적으로 구하는 문제가 나온다면 Prefix sum 배열을 초기화 해놓고 사용할 생각을 하면 될 것 같다. 하지만, O(n^2)이 시간 초과가 되는 경우, <strong>O(n)으로 줄일 수 있는 아이디어를 생각하는 것이 더 중요</strong>할 것 같다. 아래의 두 문제는 O(n^2)으로 제출시 시간초과가 발생하였고, 아래와 같이 해결할 수 있었다.</p>
 <ol>
 <li>순차적인 조건이 2가지(A→B) 있는 경우, A가 충족될때 B를 구할 수도 있지만, B가 충족될때 A를 모두 포함해주는 방법도 있다.</li>
 <li>차의 최대는 최대- 최소이므로, 각 엔트리별로 돌면서 최솟값을 빼주는 방향으로 시간을 줄일 수 있었다.</li>
 </ol>
-<p>난 이런 것들을 생각해낼 수 없겠지…🤣</p></div></div><div class="post-navigator"><div class="post-navigator-card-wrapper"><a class="post-card prev" href="/FE-NextJS-1/"><div class="direction">이전 글</div><div class="title">(React) NextJS 입문해보기 - (1)</div></a></div><div class="post-navigator-card-wrapper"></div></div><div class="utterances"></div></main><footer class="page-footer-wrapper"><p class="page-footer">© <!-- -->2022<!-- --> <a href="https://github.com/choieastsea">choieastsea</a> powered by<a href="https://github.com/zoomKoding/zoomkoding-gatsby-blog"> zoomkoding-gatsby-blog</a></p></footer><div class="dark-mode-button-wrapper"><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium dark-mode-button css-1yxmbwk" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge dark-mode-icon css-6flbmm" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="DarkModeIcon"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path></svg></button></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/Alg-Prefix-Sum/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-cd840d73727c2e366b63.js"],"app":["/app-9e34a2aeab6f8f0d4255.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-3c26d4b7e3608ed0ece4.js"],"component---src-pages-404-js":["/component---src-pages-404-js-4917da7ef5b541e98a81.js"],"component---src-pages-about-js":["/component---src-pages-about-js-b5804eba3d16afcb3700.js"],"component---src-pages-index-js":["/component---src-pages-index-js-bc882cd03f70c89c8148.js"],"component---src-templates-blog-template-js":["/component---src-templates-blog-template-js-ef83b594aa693e649d30.js"],"component---src-templates-category-template-js":["/component---src-templates-category-template-js-fea460fedd50cffb10cd.js"]};/*]]>*/</script><script src="/polyfill-cd840d73727c2e366b63.js" nomodule=""></script><script src="/component---src-templates-blog-template-js-ef83b594aa693e649d30.js" async=""></script><script src="/f9d3028dbef90a6e9b8db85387d63dd9f4edf538-3528d048b96f92ca0d99.js" async=""></script><script src="/app-9e34a2aeab6f8f0d4255.js" async=""></script><script src="/framework-0e1bf37de02f7cef2174.js" async=""></script><script src="/webpack-runtime-1b8c10c4781f5193d35f.js" async=""></script></body></html>
+<p>난 이런 것들을 생각해낼 수 없겠지…🤣</p></div></div><div class="post-navigator"><div class="post-navigator-card-wrapper"><a class="post-card prev" href="/FE-NextJS-2/"><div class="direction">이전 글</div><div class="title">(React) NextJS 입문해보기 - (2) data fetching, localtunnel 이용하여 공개하기</div></a></div><div class="post-navigator-card-wrapper"><a class="post-card next" href="/Alg-Greedy/"><div class="direction">다음 글</div><div class="title">(Alg) Greedy Algorithm. 그리디(탐욕) 기법으로 문제 해결하기</div></a></div></div><div class="utterances"></div></main><footer class="page-footer-wrapper"><p class="page-footer">© <!-- -->2022<!-- --> <a href="https://github.com/choieastsea">choieastsea</a> powered by<a href="https://github.com/zoomKoding/zoomkoding-gatsby-blog"> zoomkoding-gatsby-blog</a></p></footer><div class="dark-mode-button-wrapper"><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium dark-mode-button css-1yxmbwk" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge dark-mode-icon css-6flbmm" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="DarkModeIcon"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path></svg></button></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/Alg-Prefix-Sum/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-cd840d73727c2e366b63.js"],"app":["/app-9e34a2aeab6f8f0d4255.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-3c26d4b7e3608ed0ece4.js"],"component---src-pages-404-js":["/component---src-pages-404-js-4917da7ef5b541e98a81.js"],"component---src-pages-about-js":["/component---src-pages-about-js-b5804eba3d16afcb3700.js"],"component---src-pages-index-js":["/component---src-pages-index-js-bc882cd03f70c89c8148.js"],"component---src-templates-blog-template-js":["/component---src-templates-blog-template-js-ef83b594aa693e649d30.js"],"component---src-templates-category-template-js":["/component---src-templates-category-template-js-fea460fedd50cffb10cd.js"]};/*]]>*/</script><script src="/polyfill-cd840d73727c2e366b63.js" nomodule=""></script><script src="/component---src-templates-blog-template-js-ef83b594aa693e649d30.js" async=""></script><script src="/f9d3028dbef90a6e9b8db85387d63dd9f4edf538-3528d048b96f92ca0d99.js" async=""></script><script src="/app-9e34a2aeab6f8f0d4255.js" async=""></script><script src="/framework-0e1bf37de02f7cef2174.js" async=""></script><script src="/webpack-runtime-1b8c10c4781f5193d35f.js" async=""></script></body></html>
