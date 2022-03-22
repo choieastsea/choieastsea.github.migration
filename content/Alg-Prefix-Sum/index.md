@@ -27,7 +27,7 @@ prefix sum은 자주 등장하는 주제이고, 알고 있으면 매우 유용�
 
 처음 P를 초기화 할때 나는 아래와 같이 했었다.
 
-```c++
+```cpp
 int a[] = {1, 2, 3, 4, -5, 0, 3};
 int p[7] = {0};
 for (int i = 0; i < 7; i++)
@@ -45,7 +45,7 @@ for (int i = 0; i < 7; i++)
 
 P[i] = P[i-1] + a[i] 임을 이용하여 초기화 하는 것이다. 단, 여기서는 i가 1이상이여야 하므로 <u>배열을 1번 인덱스부터 채우는 것이 편하다</u>.
 
-```c++
+```cpp
 int a[] = {0, 1, 2, 3, 4, -5, 0, 3};
 int p[7] = {0};
 for (int i = 1; i <= 7; i++)
@@ -86,7 +86,7 @@ n-k+1. 구간 길이 n : 1~n까지의 평균
 
 코드는 다음과 같다.
 
-```c++
+```cpp
 #include <iostream>
 #include <bits/stdc++.h>
 
@@ -147,7 +147,7 @@ int main()
 
 코드는 아래와 같다. 전 문제와 다르게 동적 할당을 하면 시간이 더 오래걸리는 것 같아, 정적 배열로 선언하였다.
 
-```c++
+```cpp
 #include <iostream>
 #include <bits/stdc++.h>
 
@@ -215,7 +215,7 @@ Yasser라는 사람과 Adel이 각자 정수형 배열에서 점수를 매겨 Ya
 
 코드는 다음과 같다.
 
-```c++
+```cpp
 #include <iostream>
 #include <bits/stdc++.h>
 
