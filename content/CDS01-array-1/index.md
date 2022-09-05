@@ -93,7 +93,7 @@ BASE와 STEP이 참임을 보이면 해당 함수는 모든 자연수에서 성�
 
 ### merge algorithm
 
-```c++
+```c
 void merge(int ret[], int first[], int second[], int n, int first_size, int second_size)
 {
     // 정렬된 두 배열을 합쳐 하나의 정렬된 배열로 만든다.
@@ -140,7 +140,7 @@ C++에서는 배열의 이름이 배열의 주소를 의미하고, 이를 하나
 
 이제, merge sort를 재귀적으로 구현해보자! 핵심은 재귀적으로 생각하는 방법이다.
 
-```c++
+```c
 void merge_sort(int arr[], int n)
 {
     int i;
