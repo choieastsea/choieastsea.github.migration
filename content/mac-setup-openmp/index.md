@@ -25,7 +25,7 @@ categories: 블로그
 
    우선, 소스코드에 `#pragma omp parallel`이 main 함수 안에 선언되어 있어야 한다. 나는 다음과 같이 적어주었다.
 
-   ```c++
+   ```cpp
    #include <iostream>
    
    int main(){
@@ -58,6 +58,6 @@ categories: 블로그
 
    실행환경의 Thread 수만큼 Hello World가 찍혀서 나오는 것을 볼 수 있다. 이러면 openmp환경이 세팅되었다고 보면 될 것 같다.
 
-   ![Screen Shot 2022-09-05 at 10.31.39](/Users/eastsea/dev/vs_code_workspace/choieastsea.github.io/content/mac-setup-openmp/m1pro.png)
+   ![m1pro.png](./m1pro.png)
 
    나의 경우, m1 pro칩이 들어간 mac book pro를 사용중인데, 8코어 8쓰레드인 걸 지금 알았다... ㅎ
