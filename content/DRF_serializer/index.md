@@ -155,4 +155,4 @@ DRF에서는 이 두가지의 과정을 도와주는 `Serializer` 클래스와 `
 
 핵심은 DB의 데이터를 조작하기 위해 Serializer를 거쳐야 한다는 것이다. db에 넣기 위해 deserailize, db에서 값을 가져오기 위해 serailize를 수행하고, 이를 위한 Serailizer 객체를 구현하여 사용하면 된다.
 
-아직은 간단하게 구현해보았지만, 조건을 부여하여 orm으로 가져오는 QuerySet과 view를 간단하게 처리하기 위한 ViewSet 등의 개념도 배워봐야할 것 같다... 어렵네요.!
+아직은 간단하게 구현해보았지만, 조건을 부여하여 orm으로 가져오는 QuerySet과 view를 간단하게 처리하기 위한 ViewSet 등의 개념도 배워봐야할 것 같다... 어렵네요.! +django admin도 해봐야한다..!
