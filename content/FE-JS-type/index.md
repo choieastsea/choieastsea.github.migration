@@ -122,9 +122,9 @@ console.log(person.age === age_origin) //false
 ```javascript
 const list_a = [1,2,3];
 list_a.concat(4); //[1,2,3,4]의 새로운 배열을 리턴 (immutable)
-console.log(a); // [1,2,3]!
+console.log(list_a); // [1,2,3]!
 list_a.push(4);	// list_a에 접근하여 4를 추가 (mutable)
-console.log(a); // [1,2,3,4]
+console.log(list_a); // [1,2,3,4]
 ```
 
 물론 함수 자체는 mutable하지만, 이는 함수의 성격에 따라 나눈 것이므로 구분지을 필요가 있다.
