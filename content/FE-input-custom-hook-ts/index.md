@@ -32,7 +32,7 @@ function useInputObjectCallback<T>(
   ) => void
 ] {
   const [state, setState] = useState<T>(initialState);
-  const onChangeLoginInput = useCallback(
+  const onChangeInput = useCallback(
     (
       e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>,
       inputType: string
@@ -45,7 +45,7 @@ function useInputObjectCallback<T>(
     },
     []
   );
-  return [state, setState, onChangeLoginInput];
+  return [state, setState, onChangeInput];
 }
 
 export { useInputObjectCallback };
