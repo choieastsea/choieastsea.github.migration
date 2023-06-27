@@ -257,16 +257,16 @@ connection<span class="token punctuation">.</span><span class="token function">q
 <h3 id="plus-api-수정" style="position:relative;"><a href="#plus-api-%EC%88%98%EC%A0%95" aria-label="plus api 수정 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>plus API 수정</h3>
 <p>위에서 버튼을 누르면 서버에 저장된 count 변수를 +1해주는 api를 작성했었다. 이를 DB의 count를 가져와 더해주는 것으로 간단하게 수정해보자!</p>
 <p>우선 DB에서 count 값을 가져와서 보여주려고 한다. react의 <code class="language-text">useEffect</code> hook을 사용하여 렌더링될 때, DB에서 data값을 가져오도록 하였다.</p>
-<div class="gatsby-highlight" data-language="react"><pre class="language-react"><code class="language-react">//App.js
-const [count, setCount] = useState(null);
-useEffect(() =&gt; {
-  fetch(&quot;/api/get&quot;).then((res) =&gt; {
-    res.json().then((data) =&gt; {
-      const { count } = data;
-      setCount(count);
-    });
-  });
-}, []);</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//App.js</span>
+<span class="token keyword">const</span> <span class="token punctuation">[</span>count<span class="token punctuation">,</span> setCount<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">"/api/get"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> <span class="token punctuation">{</span> count <span class="token punctuation">}</span> <span class="token operator">=</span> data<span class="token punctuation">;</span>
+      <span class="token function">setCount</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>AJAX로 get해주고 이에 대한 get api를 아래의 <code class="language-text">server.js</code>에서 처리해주도록 하였다. DB의 express 테이블에서 count를 가져와서 리턴해주는 것이다.</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//in server.js</span>
 app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/api/get"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
@@ -304,22 +304,22 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
     </span></p>
 <p>이제, 더해주는 것을 반영해주기만 하면 된다.<code class="language-text">server.js</code>에서 plus를 눌렀을 때 DB 값을 처리해주자.</p>
 <p>우선 브라우저에서 plus 버튼이 눌리면 server에 함수를 호출하여 수정된 count값을 받아온다고 해준다.</p>
-<div class="gatsby-highlight" data-language="react"><pre class="language-react"><code class="language-react">//App.js	
-&lt;input
-        type=&quot;button&quot;
-        value=&quot;plus&quot;
-        onClick={() =&gt; {
-          fetch(&quot;/api/plus&quot;).then((res) =&gt; {
-            //서버의 응답을 json형태로 받아 출력
-            console.log(res);
-            res.json().then((data) =&gt; {
-              const { count } = data;
-              setCount(count);
-            });
-          });
-        }}
-        style={{ margin: &quot;10rem&quot; }}
-      /&gt;</code></pre></div>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//App.js	</span>
+<span class="token operator">&lt;</span>input
+        type<span class="token operator">=</span><span class="token string">"button"</span>
+        value<span class="token operator">=</span><span class="token string">"plus"</span>
+        onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+          <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">"/api/plus"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+            <span class="token comment">//서버의 응답을 json형태로 받아 출력</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+              <span class="token keyword">const</span> <span class="token punctuation">{</span> count <span class="token punctuation">}</span> <span class="token operator">=</span> data<span class="token punctuation">;</span>
+              <span class="token function">setCount</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">}</span>
+        style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> margin<span class="token operator">:</span> <span class="token string">"10rem"</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+      <span class="token operator">/</span><span class="token operator">></span></code></pre></div>
 <p>이제 api/plus를 server.js에서 처리해준다.</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript">app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/api/plus"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token keyword">try</span> <span class="token punctuation">{</span>
