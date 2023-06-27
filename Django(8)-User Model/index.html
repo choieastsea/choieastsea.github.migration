@@ -79,16 +79,267 @@
 
 <span class="token keyword">class</span> <span class="token class-name">Profile</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token comment"># OneToOne Field로 django의 User model과 연결</span>
-    user <span class="token operator">=</span> models<span class="token punctuation">.</span>OneToOneField<span class="token punctuation">(</span>User<span class="token punctuation">,</span> on_delete<span class="token operator">=</span>models<span class="token punctuation">.</span>CASCADE<span class="token punctuation">,</span> primary_key<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    user <span class="token operator">=</span> models<span class="token punctuation">.</span>OneToOneField<span class="token punctuation">(</span>User<span class="token punctuation">,</span> on_delete<span class="token operator">=</span>models<span class="token punctuation">.</span>CASCADE<span class="token punctuation">,</span> primary_key<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'계정'</span><span class="token punctuation">)</span>
     <span class="token comment"># additional fields</span>
-    phone_number <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">15</span><span class="token punctuation">,</span> blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-    address <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span> blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    phone_number <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">15</span><span class="token punctuation">,</span> blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'전화번호'</span><span class="token punctuation">)</span>
+    address <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span> blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'주소'</span><span class="token punctuation">)</span>
 
 
     <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> self<span class="token punctuation">.</span>username</code></pre></div>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>user<span class="token punctuation">.</span>username
+    
+    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+        db_table <span class="token operator">=</span> <span class="token string">'profile'</span>
+        verbose_name <span class="token operator">=</span> <span class="token string">'회원'</span>
+        verbose_name_plural <span class="token operator">=</span> <span class="token string">'회원들'</span>
+</code></pre></div>
+<p>model 클래스의 str 함수는 print와 같이 인스턴스를 문자열로 변환할 때 사용되며, 이는 관리자 페이지에서 식별하기 쉽게 도와준다.</p>
 <p><code class="language-text">python manage.py makemigrations myuser</code> 와 <code class="language-text">python manage.py migrate myuser</code> 명령어로 마이그레이션을 적용해준다.</p>
-<p>이제, 로그인과 회원가입을 처리해주자!</p>
-<h3 id="로그인과-회원가입" style="position:relative;"><a href="#%EB%A1%9C%EA%B7%B8%EC%9D%B8%EA%B3%BC-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85" aria-label="로그인과 회원가입 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>로그인과 회원가입</h3>
-<p>우리는 django의 user model을 사용하므로, user class에서 제공하는 함수(로그인, 로그아웃, 회원가입 등) 역시 모두 사용할 수 있다.</p>
-<h3 id="csrf-" style="position:relative;"><a href="#csrf-" aria-label="csrf  permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CSRF ?</h3></div></div><div class="post-navigator"><div class="post-navigator-card-wrapper"><a class="post-card prev" href="/Django(7)-Search&amp;CORS/"><div class="direction">이전 글</div><div class="title">(Django) 장고 api 서버를 이용한 프로젝트 [7-Search, 브라우저와 연결하기]</div></a></div><div class="post-navigator-card-wrapper"><a class="post-card next" href="/FE-input-custom-hook-ts/"><div class="direction">다음 글</div><div class="title">(React TS) 다양한 input을 다룰 수 있는 custom hook</div></a></div></div><div class="utterances"></div></main><footer class="page-footer-wrapper"><p class="page-footer">© <!-- -->2023<!-- --> <a href="https://github.com/choieastsea">choieastsea</a> powered by<a href="https://github.com/zoomKoding/zoomkoding-gatsby-blog"> zoomkoding-gatsby-blog</a></p></footer><div class="dark-mode-button-wrapper"><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium dark-mode-button css-1yxmbwk" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge dark-mode-icon css-6flbmm" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="DarkModeIcon"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path></svg></button></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/Django(8)-User Model/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-cd840d73727c2e366b63.js"],"app":["/app-9e34a2aeab6f8f0d4255.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-3c26d4b7e3608ed0ece4.js"],"component---src-pages-404-js":["/component---src-pages-404-js-4917da7ef5b541e98a81.js"],"component---src-pages-about-js":["/component---src-pages-about-js-b5804eba3d16afcb3700.js"],"component---src-pages-index-js":["/component---src-pages-index-js-bc882cd03f70c89c8148.js"],"component---src-templates-blog-template-js":["/component---src-templates-blog-template-js-ef83b594aa693e649d30.js"],"component---src-templates-category-template-js":["/component---src-templates-category-template-js-fea460fedd50cffb10cd.js"]};/*]]>*/</script><script src="/polyfill-cd840d73727c2e366b63.js" nomodule=""></script><script src="/component---src-templates-blog-template-js-ef83b594aa693e649d30.js" async=""></script><script src="/f9d3028dbef90a6e9b8db85387d63dd9f4edf538-3528d048b96f92ca0d99.js" async=""></script><script src="/app-9e34a2aeab6f8f0d4255.js" async=""></script><script src="/framework-0e1bf37de02f7cef2174.js" async=""></script><script src="/webpack-runtime-9dba177fcd04cde2dbcd.js" async=""></script></body></html>
+<p>이제, 회원을 생성해보자.</p>
+<h3 id="관리자페이지에서-custom-user-profile-추가하기" style="position:relative;"><a href="#%EA%B4%80%EB%A6%AC%EC%9E%90%ED%8E%98%EC%9D%B4%EC%A7%80%EC%97%90%EC%84%9C-custom-user-profile-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0" aria-label="관리자페이지에서 custom user profile 추가하기 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>관리자페이지에서 custom user profile 추가하기</h3>
+<p>myuser/admin.py에서 방금 만들어준 모델을 추가해보자.</p>
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib <span class="token keyword">import</span> admin
+<span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> Profile
+<span class="token comment"># Register your models here.</span>
+
+admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>register<span class="token punctuation">(</span>Profile<span class="token punctuation">)</span></code></pre></div>
+<p>이후, 관리자 페이지에 가면 다음과 같이 Profile 객체를 추가할 수 있다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; "
+    >
+      <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 49.44444444444444%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB7UlEQVQoz43STU8TQRjA8f1k6oW7N7+GJJL0ool4MUbjhxAUjXCAKBp5tyLYuvJiW2yh21LqLha6bbfd7szuzN/sQJoQPfAkv8zb7jNPZsYayzzjzuRjbj94wljmKTfuPTduTlx165qszMwqj+bWmJxb5+FclvtvN8i8XmPi1SrjU8uMT68Yd6eWr8Xar3tsFByypTr5qkfO8fh25JJ3PE57IZ4fGO1QGH4o8YfyojXEaC1l2bVTZvNlFvdrvN+rmfbdXpWFnQoiTkikQKuEUWiFiuO0c+lqWJFMCKMYrUGpC4mCdF4pTRAEJEqhtEZrzXAY0en2iGPBUIRm03Qt/TZlbR5WeZPLMZOzmdqymd62ebH1nZfbNgMhEVFEFEWjCjrBEKfRwm0FdEPo9BXtIDaSRGENIhe/fwA4KF1Fa4dEHdGPymgd0x+ECClHVXZ7AU3Xo3Xepu13DSFj4rRSpbB2G+cslZos7jeY36mzsFtnfueYDz9PGESS/4f+R5osPRKrftbFdlwOT33KXpuK53PgnmHXTsyv67u/mM3+YO3ghKXCMcvFBiulBl8PXT4VjlkqNvjTCYilNEdjSSFo+R1ULCG9TZWgE0E/7JmE26UqH/NFto5csuUmXypNNiu/SV/H58vxeW9gEgoh+AvtbMBjOWitOgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="image-20230424095336175"
+        title="image-20230424095336175"
+        src="/static/43ab64bbaa96faed5de7682b92bfae37/37523/admin-signup.png"
+        srcset="/static/43ab64bbaa96faed5de7682b92bfae37/e9ff0/admin-signup.png 180w,
+/static/43ab64bbaa96faed5de7682b92bfae37/f21e7/admin-signup.png 360w,
+/static/43ab64bbaa96faed5de7682b92bfae37/37523/admin-signup.png 720w,
+/static/43ab64bbaa96faed5de7682b92bfae37/302a4/admin-signup.png 1080w,
+/static/43ab64bbaa96faed5de7682b92bfae37/07a9c/admin-signup.png 1440w,
+/static/43ab64bbaa96faed5de7682b92bfae37/81315/admin-signup.png 1656w"
+        sizes="(max-width: 720px) 100vw, 720px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+    </span></p>
+<p>하지만, 이는 기존 User Model이 존재해야한다. 여기서는 관리자 계정을 만들면서 user가 생성되었기에 그것에 1:1로 대응되는 커스텀 유저를 만들 수 있다. 이제, 브라우저에서 로그인과 회원가입을 구현해보자.</p>
+<h2 id="로그인" style="position:relative;"><a href="#%EB%A1%9C%EA%B7%B8%EC%9D%B8" aria-label="로그인 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>로그인</h2>
+<p>우리는 django의 user model을 사용하므로, user class에서 제공하는 함수(로그인, 로그아웃, 회원가입 등) 역시 모두 사용할 수 있다. user model이 하나 있으므로, 좀 더 간단한 로그인을 먼저 구현하고 이후에 회원가입을 구현해보자.</p>
+<p><a href="">프런트를 보면 로그인과 회원가입 페이지가 구현되어 있을 것</a>이다.</p>
+<p>api 요구사항은 다음과 같다.</p>
+<blockquote>
+<p>[REQUEST]</p>
+<p>POST <a href="http://localhost:8000/user/login/">http://localhost:8000/user/login/</a>
+body : { username : string, password: string}</p>
+<p>[RESPONSE]</p>
+<p>정상 케이스 : 202
+유효하지 않은 입력 : 403</p>
+</blockquote>
+<p>우선 관리자 페이지로 만든 회원으로 로그인을 진행해보도록 하자. 로그인에 성공하면, 사용자 이름을 리턴하는 함수를 만들어주자.</p>
+<span class="gatsby-resp-image-wrapper" style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; ">
+      <span class="gatsby-resp-image-background-image" style="padding-bottom: 59.44444444444444%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAABYlAAAWJQFJUiTwAAABFklEQVQoz6WSvU7DMBDH/RCsfEhdWHk1pkYdWHgEdkYWWvEELCxIfAi5CSM0qFFDSgRS6tqxz/lXDk0ohS7uST+ddb47/886VhQF0jRFnue111rDWVVVXrAkSRBFEeI4RhiGkFK2DX2MNZ2tta0nIi9qhcYYCCGglPIe1ZkT4mCrL/iqa+q+FRJBlRpSldDawBjywtXWCmEJpCXK+cwJh7+58S3Yl9B4nUq85Qrxh/yX0Yb4Opos2Nl1ip3jJ3R6Q+wH/Bd7AcdBwHF0+ozDkxC7Xf4np87rcnR6HC+ZBBuOZzi/meDi9h39+wyXdxn6S5rz1eMUg7W7lmV88JChkAZMlBafgjDX2/zfymL/fGgFstvh1mYB7cWJUeCCIV0AAAAASUVORK5CYII='); background-size: cover; display: block;"></span>
+  <img class="gatsby-resp-image-image" alt="login" title="login" src="/static/5f0f6168fdf9f1e35a83111aae154b5a/37523/login.png" srcset="/static/5f0f6168fdf9f1e35a83111aae154b5a/e9ff0/login.png 180w,
+/static/5f0f6168fdf9f1e35a83111aae154b5a/f21e7/login.png 360w,
+/static/5f0f6168fdf9f1e35a83111aae154b5a/37523/login.png 720w,
+/static/5f0f6168fdf9f1e35a83111aae154b5a/302a4/login.png 1080w,
+/static/5f0f6168fdf9f1e35a83111aae154b5a/f3a19/login.png 1086w" sizes="(max-width: 720px) 100vw, 720px" style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;" loading="lazy" decoding="async">
+    </span>
+<p>우선, <u>클라이언트의 입력을 검증</u>하기 위한 serailizer와 <u>사용자의 정보를 리턴</u>할 때 사용할 serializer가 필요하다. myuser/serializers.py에 다음과 같이 만들어주었다.</p>
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> serializers
+<span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> Profile
+<span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>exceptions <span class="token keyword">import</span> AuthenticationFailed
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth <span class="token keyword">import</span> authenticate
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>models <span class="token keyword">import</span> User
+
+<span class="token keyword">class</span> <span class="token class-name">LoginSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>Serializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    로그인 시, 입력을 검증하기 위한 serializer
+    """</span>
+    username <span class="token operator">=</span> serializers<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    password <span class="token operator">=</span> serializers<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">validate</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        username <span class="token operator">=</span> data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'username'</span><span class="token punctuation">)</span>
+        password <span class="token operator">=</span> data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token keyword">or</span> <span class="token builtin">len</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
+            user <span class="token operator">=</span> authenticate<span class="token punctuation">(</span>username<span class="token operator">=</span>username<span class="token punctuation">,</span> password<span class="token operator">=</span>password<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> user<span class="token punctuation">:</span>
+                <span class="token keyword">if</span> user<span class="token punctuation">.</span>is_active<span class="token punctuation">:</span>
+                    data<span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span> <span class="token operator">=</span> user
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    <span class="token keyword">raise</span> AuthenticationFailed<span class="token punctuation">(</span><span class="token string">'비활성화된 사용자입니다'</span><span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">raise</span> AuthenticationFailed<span class="token punctuation">(</span><span class="token string">'아이디나 비밀번호가 다릅니다'</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">raise</span> AuthenticationFailed<span class="token punctuation">(</span><span class="token string">'아이디와 비밀번호 모두 입력해야합니다'</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> data
+
+<span class="token keyword">class</span> <span class="token class-name">ProfileSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+        model <span class="token operator">=</span> Profile
+        fields <span class="token operator">=</span> <span class="token string">"__all__"</span>
+    
+<span class="token keyword">class</span> <span class="token class-name">UserInfoSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  
+    profile <span class="token operator">=</span> ProfileSerializer<span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token comment">#one to one field이므로, user에 해당하는 profile을 가져오면 됨</span>
+    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+        model <span class="token operator">=</span> User
+        fields <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'username'</span><span class="token punctuation">,</span> <span class="token string">'profile'</span><span class="token punctuation">)</span>
+        </code></pre></div>
+<p>django에서는 로그인과 관련하여, <code class="language-text">authenticate</code>를 사용할 수 있다. 이는 django user model에 존재하는 username과 password로 사용자를 확인하는 것이다.</p>
+<p>이제, request를 검증하는 <code class="language-text">LoginSerializer</code>와 사용자에게 profile 정보를 제공하기 위한 <code class="language-text">UserInfoSerializer</code>를 이용하여 코드를 간소화할 수 있다. 아래는 myuser/views.py 에서 이를 처리해준 것이다. 로그인은 다른 기능과 url도 다르게 사용하므로 <code class="language-text">@api_view</code>를 이용한 FBV로 구현해보았다.</p>
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>response <span class="token keyword">import</span> Response
+<span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>decorators <span class="token keyword">import</span> api_view
+<span class="token keyword">from</span> <span class="token punctuation">.</span>serializers <span class="token keyword">import</span> LoginSerializer<span class="token punctuation">,</span> UserInfoSerializer
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth <span class="token keyword">import</span> login
+<span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> status
+
+<span class="token decorator annotation punctuation">@api_view</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">login_view</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    세션 방식으로 로그인을 처리하는 함수
+    """</span>
+    login_serailizer <span class="token operator">=</span> LoginSerializer<span class="token punctuation">(</span>data<span class="token operator">=</span>request<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> login_serailizer<span class="token punctuation">.</span>is_valid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># 유효한 입력의 경우 로그인</span>
+        user <span class="token operator">=</span> login_serailizer<span class="token punctuation">.</span>validated_data<span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span>
+        user_info <span class="token operator">=</span> UserInfoSerializer<span class="token punctuation">(</span>user<span class="token punctuation">)</span>
+        login<span class="token punctuation">(</span>request<span class="token punctuation">,</span>user<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> Response<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"detail"</span> <span class="token punctuation">:</span> user_info<span class="token punctuation">.</span>data<span class="token punctuation">}</span><span class="token punctuation">,</span>status<span class="token operator">=</span>status<span class="token punctuation">.</span>HTTP_202_ACCEPTED<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Response<span class="token punctuation">(</span>login_serailizer<span class="token punctuation">.</span>errors<span class="token punctuation">)</span>
+</code></pre></div>
+<p>LoginSerializer를 거친 user는 <code class="language-text">authenticate</code>이 완료되었으므로, <code class="language-text">login</code> 함수로 로그인시켜주면 된다. login함수의 역할은 기본적으로 설정되어있는 <strong>session 방식으로 서버에서 사용자의 로그인 정보를 저장하도록 수행</strong>된다.</p>
+<p>마지막으로, urls.py에서 해당 FBV를 수행하도록 매핑해준다. 프론트에서는 <code class="language-text">/user/login/</code> POST 요청으로 이를 보내므로 아래와 같이 적어주면 된다.</p>
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python">urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    path<span class="token punctuation">(</span><span class="token string">'login/'</span><span class="token punctuation">,</span> views<span class="token punctuation">.</span>login_view<span class="token punctuation">)</span>
+<span class="token punctuation">]</span></code></pre></div>
+<p>Postman에서 <a href="https://github.com/choieastsea/market-guri-django/commit/344f80e5a7d8a198ebe4ab026652490d83e5f17f">여태까지의 코드</a>를 테스트해보자.</p>
+<span class="gatsby-resp-image-wrapper" style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; ">
+      <span class="gatsby-resp-image-background-image" style="padding-bottom: 96.11111111111111%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWJQFJUiTwAAACAElEQVQ4y41TW5KjMAzkJDHYxi8MNhAg1M5U5f6X6i0pgeyyyQ4fHSlt05L1KHLOWNcV3ntG3/dYlgXzPON2u+G2LGyJd87t994hhICCnJQSrLVMtG2LGCNzXU5o2ggKSna7swnQfwpCIN4Yg0JrzY5Sig/okpSSudoZCFWhDw4pWkitdgE6p2/rumbrQ0BVVShIgLLZMt38ruuQU0bqEj83dR2GtkHbNPwKAt2j0oTgUfkeyjYoKJstkvOOs5NSccYbJIH5P/EvV0n5t6AxNULqkeYV1gd03mBOEbbWKKsSUlaQVcW2OtgNLEhZ9H3E19eE65SxrBPGscU0Rqxzh3FokHNAfwIsWJYlg6KVQkCIy84J8To7g13wp4tbgJ9QfDqojv/PZkgDuc2itjU0dds6KKOha73P3FF06+qx08X3NGK5joixhY8B7jmDNrh9HmlWedBpiJVifHwyrdX9fn+sVwicEYlQ5rFpmCcxGm4KGrxD6x3EhzIUQojHqlkDZSy0sXsTBHdc7P6xpu/qW9AP1ZBsbR3iMKEdZxjrEEyNxprXx4euv81wE3xMfQnjA4tSLdWzVrwdZ7v8EqSNkUzm2xfy8gvtcEUbPDpv0QWHxpnzgvyErf1KQ+qauVpJ3pbLReDCNS3/CxakLo5jwjBE3tmcPHJy7Cfyn3uaT+A38uskV5TM6yUAAAAASUVORK5CYII='); background-size: cover; display: block;"></span>
+  <img class="gatsby-resp-image-image" alt="image-20230427115004800" title="image-20230427115004800" src="/static/d290deded7ab3bf0391d6b3f20c2e1c2/37523/logintest.png" srcset="/static/d290deded7ab3bf0391d6b3f20c2e1c2/e9ff0/logintest.png 180w,
+/static/d290deded7ab3bf0391d6b3f20c2e1c2/f21e7/logintest.png 360w,
+/static/d290deded7ab3bf0391d6b3f20c2e1c2/37523/logintest.png 720w,
+/static/d290deded7ab3bf0391d6b3f20c2e1c2/302a4/logintest.png 1080w,
+/static/d290deded7ab3bf0391d6b3f20c2e1c2/f8836/logintest.png 1214w" sizes="(max-width: 720px) 100vw, 720px" style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;" loading="lazy" decoding="async">
+    </span>
+<p>로그인을 수행하고, db에서 django_session table을 보면 세션 레코드가 추가된 것을 볼 수 있다. 각 행은 <code class="language-text">session_key</code>, <code class="language-text">session_data</code>, <code class="language-text">expire_date</code>로 구성되어 있다.</p>
+<h3 id="로그인-상태-유지---session-vs-token" style="position:relative;"><a href="#%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%83%81%ED%83%9C-%EC%9C%A0%EC%A7%80---session-vs-token" aria-label="로그인 상태 유지   session vs token permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>로그인 상태 유지 - session vs token</h3>
+<blockquote>
+<p>사용자는 로그인을 하면 당분간 로그인을 다시 하지 않고 서비스를 이용할 수 있다고 생각한다.</p>
+</blockquote>
+<p>로그인과 관련하여 서버는 크게 둘 중 하나의 기능을 제공할 수 있는데, 이는 세션과 토큰이다.</p>
+<p>로그인 성공시,</p>
+<ol>
+<li>
+<p>세션</p>
+<p>서버에서는 보통 로그인된 사용자들을 DB에 기록해놓는다. 해당 테이블에는 sessionId와 같은 세션 키 값과 세션 정보(주로 사용자 계정의 id 등)가 들어있고, 로그인 성공시 sessionId가 생성되며 사용자에게 <code class="language-text">sessionId</code>를 제공한다.</p>
+<p>이후, 사용자는 인증이 필요한 요청을 보낼때마다 서버에게 sesionId를 함께 전송하여 서버에서는 유효한 사용자임을 확인할 수 있다. 요청이 들어온 사용자를 식별할 수 있고, 중복 로그인 방지 등의 기능을 구현할 수 있다.</p>
+</li>
+<li>
+<p>토큰</p>
+<p>서버에서 로그인 성공시 유효한 토큰을 발급하여 사용자에게 제공한다. 해당 토큰은 유효기간이 있으며, 인증이 필요한 요청을 보낼 때 서버에 toekn 정보를 함께 전송하여 서버에서 해당 토큰이 유효한지 여부를 확인할 수 있다.</p>
+</li>
+</ol>
+<p>Django는 기본적으로 session 방식의 로그인을 지원하며, 위의 login함수가 호출되면 db에 존재하는 <code class="language-text">django_session</code> 테이블에 세션 정보가 추가된다. (이는 settings.py의 middleware와 installed_apps에 명시되어 있음)</p>
+<h3 id="세션과-관련된-흐름" style="position:relative;"><a href="#%EC%84%B8%EC%85%98%EA%B3%BC-%EA%B4%80%EB%A0%A8%EB%90%9C-%ED%9D%90%EB%A6%84" aria-label="세션과 관련된 흐름 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>세션과 관련된 흐름</h3>
+<ol>
+<li>
+<p>로그인에 성공한(authenticated) 사용자에게 sessionId를 제공해준다. sessionId는 <strong>중요한 데이터를 담고 있지 않아야 할</strong> 것이다.(db에서 세션 데이터를 찾는 용도로만 사용하면 됨)</p>
+</li>
+<li>
+<p>클라이언트는 이를 브라우저에 저장한다. (쿠키 권장, <code class="language-text">HttpOnly</code> 설정하여 js에서 접근 못하도록) 또한, 사용자가 로그인 되어있는 UI/UX를 제공한다.</p>
+</li>
+<li>
+<p>사용자는 이후 인증이 필요한 요청에 대하여 sessionId를 headers에 실어서 보낸다.</p>
+</li>
+<li>
+<p>장고에서는 request 객체에서 <code class="language-text">request.user</code>를 이용하여 세션을 검증할 수 있다.</p>
+</li>
+<li>
+<p>로그아웃 요청에 대하여 서버는 logout 함수를 통하여 세션을 제거해준다.</p>
+</li>
+<li>
+<p>만약 세션이 만료되었다면 클라이언트는 로그아웃 처리를 해주면 된다.</p>
+</li>
+</ol>
+<h3 id="세션과-관련된-설정" style="position:relative;"><a href="#%EC%84%B8%EC%85%98%EA%B3%BC-%EA%B4%80%EB%A0%A8%EB%90%9C-%EC%84%A4%EC%A0%95" aria-label="세션과 관련된 설정 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>세션과 관련된 설정</h3>
+<p>사용자 요청이 올때마다 세션을 리프레쉬 할 수 있다.</p>
+<p>세션의 유효기간을 정할 수 있다.</p>
+<h2 id="회원가입" style="position:relative;"><a href="#%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85" aria-label="회원가입 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>회원가입</h2>
+<p>회원가입까지 완료해보자. api 요구사항은 다음과 같다.</p>
+<blockquote>
+<p>[REQUEST]</p>
+<p>POST <a href="http://localhost:8000/user/signup/">http://localhost:8000/user/signup/</a>
+body : {</p>
+<p>​	user : {username : string, password: string},</p>
+<p>​	profile : {first_name : string, last_name : string, phone_number : string, address: string}</p>
+<p>}</p>
+<p>[RESPONSE]</p>
+<p>정상 케이스 : 201
+유효하지 않은 입력 : 401</p>
+</blockquote>
+<p>입력 요청은 user와 profile로 나눠서 보낸다. 생각해보니, 1:1 모델은 매우 귀찮은 것 같다…</p>
+<p>회원가입도 로그인처럼 Serializer를 이용하여 검증을 하고 회원 생성까지 해줄 수 있다.</p>
+<p>우선, myuser/serializers.py 에서 다음과 같이 추가해주자.</p>
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">UserSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+        model <span class="token operator">=</span> User
+        fields <span class="token operator">=</span> <span class="token string">"__all__"</span>
+
+<span class="token keyword">class</span> <span class="token class-name">SignupSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    user <span class="token operator">=</span> UserSerializer<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+        model <span class="token operator">=</span> Profile
+        fields <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'user'</span><span class="token punctuation">,</span> <span class="token string">'phone_number'</span><span class="token punctuation">,</span> <span class="token string">'address'</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">def</span> <span class="token function">create</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> validated_data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        user_data <span class="token operator">=</span> validated_data<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token string">'user'</span><span class="token punctuation">)</span> 
+        user <span class="token operator">=</span> User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>create_user<span class="token punctuation">(</span><span class="token operator">**</span>user_data<span class="token punctuation">)</span> <span class="token comment"># create_user 함수에 순차적으로 인자 넣어줌</span>
+        profile <span class="token operator">=</span> Profile<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>create<span class="token punctuation">(</span>user<span class="token operator">=</span>user<span class="token punctuation">,</span> <span class="token operator">**</span>validated_data<span class="token punctuation">)</span>  <span class="token comment"># validated_data에서 user빠진 나머지(phone_number, address) 넣어줌</span>
+        <span class="token keyword">return</span> profile</code></pre></div>
+<p>create 메소드는 serializer에서 검증한 이후에 <code class="language-text">serializer.save()</code>메소드가 호출되면 실행되는 함수이다. validated_data는 dict 형식이므로 spreading해서 인자로 넣어주었다.</p>
+<p>이후 views.py에서 signup함수를 만들어주었다.</p>
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python"><span class="token decorator annotation punctuation">@api_view</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">signup_view</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    회원가입을 처리하는 함수
+    """</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>request<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+    signup_serializer <span class="token operator">=</span> SignupSerializer<span class="token punctuation">(</span>data<span class="token operator">=</span>request<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> signup_serializer<span class="token punctuation">.</span>is_valid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># 유효한 입력의 경우 회원가입 완료</span>
+        signup_serializer<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># create 호출</span>
+        <span class="token keyword">return</span> Response<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"detail"</span> <span class="token punctuation">:</span> <span class="token string">'signup success'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>status<span class="token operator">=</span>status<span class="token punctuation">.</span>HTTP_201_CREATED<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Response<span class="token punctuation">(</span>signup_serializer<span class="token punctuation">.</span>errors<span class="token punctuation">,</span> status<span class="token operator">=</span>status<span class="token punctuation">.</span>HTTP_401_UNAUTHORIZED<span class="token punctuation">)</span></code></pre></div>
+<p>serializer로 입력을 검증한 후, 입력이 유효하다면 위의 create 함수가 호출 되어 회원(User-Profile)이 만들어질 것이다!</p>
+<p>마지막으로, myuser/urls.py와 연결해주면 된다!</p>
+<div class="gatsby-highlight" data-language="python"><pre class="language-python"><code class="language-python"><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+path<span class="token punctuation">(</span><span class="token string">'signup/'</span><span class="token punctuation">,</span> views<span class="token punctuation">.</span>signup_view<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre></div>
+<p>이제 브라우저에서 테스트해볼 수 있다. 페이지는 움직이지 않지만 성공하였다는 알림을 확인할 수 있었다.</p>
+<span class="gatsby-resp-image-wrapper" style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; ">
+      <span class="gatsby-resp-image-background-image" style="padding-bottom: 115.55555555555554%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAXCAYAAAALHW+jAAAACXBIWXMAABYlAAAWJQFJUiTwAAABdElEQVQ4y6VV26rCMBDM//+Z+KaIrxVB5SC11N43ycis3Z4i5+EkLoyJmzhM9qa7XC7YbrfY7/c4nU7YbDao6xq0GCNSzT0eDxyPR+x2O1RVhcPhgLIs9TCEoKQpcMbMHxOmzHu/+P4Du++macL1esX5fEZRFOi6DrlGUscPg4h8BSXkpu97VUa1Kc/8fPKisG1bPJ9PJbQY5kBjOAyDqrO1aZpsjOMIR3Uk4kq1uUaF5FFCFjLBWPLZObAXOvtCuSTMBcmYYEcia7VvTZNi9beux2+ghCZ3XU/ZhCTixGEccyfMuv+dlcq6QOljslLajveVkBuOK8P9fteMp3aMhUsJOQdJxtlIQvrsUmo/O5uBn2MoNfOWVI3h7XZTZYRN65zhsCSFjd11rPgBXd/Dq/wZ+jfwxuL7E3PZTD5AAuADICHCh4hJgkJ8wDB5lI2gagUj/f59pusa6oskjLohmfgZIS7kgwT81KKkvOfD7/n6nsw8L0/gEOPNLnScAAAAAElFTkSuQmCC'); background-size: cover; display: block;"></span>
+  <img class="gatsby-resp-image-image" alt="signup" title="signup" src="/static/5477e84e4571029dccbac0c5dff6b530/37523/signup.png" srcset="/static/5477e84e4571029dccbac0c5dff6b530/e9ff0/signup.png 180w,
+/static/5477e84e4571029dccbac0c5dff6b530/f21e7/signup.png 360w,
+/static/5477e84e4571029dccbac0c5dff6b530/37523/signup.png 720w,
+/static/5477e84e4571029dccbac0c5dff6b530/bb2fd/signup.png 1058w" sizes="(max-width: 720px) 100vw, 720px" style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;" loading="lazy" decoding="async">
+    </span>
+<p>또한 관리자 페이지에서 이를 확인해볼 수 있다. User와 Profile에 모두 적절하게 만들어져있다.</p>
+<p><code class="language-text">create_user</code> 함수를 이용하여 사용자 모델을 만들면, <code class="language-text">비밀번호 해싱</code> 등의 작업도 알아서 해주므로 아주 편하다고 볼 수 있다. 따라서, 장고에서 제공해주는 기능이 있다면 이를 활용하는 방향으로 가는 것이 장고가 추구하는 방향이다.</p>
+<p>하지만, Profile과 같이 1:1 모델로 유저를 연결하는 것은 오늘 한 것처럼 <u>불필요한 참조</u>를 낳는다. 많이 복잡해지지는 않지만, 불필요한 serializer들이 생기고 코딩할 때 자꾸 헷갈리는 것 같다. 따라서, 다음 시간에는 Basic User Model에서 상속하여 유저모델을 커스텀하는 방법을 배워보도록 하자! 아마 그러려면 migration도 다시 세팅해야할텐데, 이 부분 역시 다뤄보면 좋을 것 같다 ^_^</p>
+<p>오늘까지 회원과 관련된 많은 기능들을 직접 구현해보고 공부해보았다. 다음에는 User Model을 가능하다면 바꿔보고, session 기능을 추가하여 브라우저에서 로그인을 유지할 수 있도록 구현해보도록 하자!</p>
+<p><a href="https://github.com/choieastsea/market-guri-react/commit/6c2a781a8580aa8a8328be70eac002c3858bdfd4">프론트 코드</a></p>
+<p><a href="https://github.com/choieastsea/market-guri-django/commit/344f80e5a7d8a198ebe4ab026652490d83e5f17f">백엔드 코드- 로그인</a></p>
+<p><a href="https://github.com/choieastsea/market-guri-django/commit/2ee58c7d34062e1d5de6d725a4b8aacc227f504f">백엔드 코드- 회원가입</a></p></div></div><div class="post-navigator"><div class="post-navigator-card-wrapper"><a class="post-card prev" href="/Django(7)-Search&amp;CORS/"><div class="direction">이전 글</div><div class="title">(Django) 장고 api 서버를 이용한 프로젝트 [7-Search, 브라우저와 연결하기]</div></a></div><div class="post-navigator-card-wrapper"><a class="post-card next" href="/FE-input-custom-hook-ts/"><div class="direction">다음 글</div><div class="title">(React TS) 다양한 input을 다룰 수 있는 custom hook</div></a></div></div><div class="utterances"></div></main><footer class="page-footer-wrapper"><p class="page-footer">© <!-- -->2023<!-- --> <a href="https://github.com/choieastsea">choieastsea</a> powered by<a href="https://github.com/zoomKoding/zoomkoding-gatsby-blog"> zoomkoding-gatsby-blog</a></p></footer><div class="dark-mode-button-wrapper"><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium dark-mode-button css-1yxmbwk" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge dark-mode-icon css-6flbmm" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="DarkModeIcon"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path></svg></button></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/Django(8)-User Model/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-cd840d73727c2e366b63.js"],"app":["/app-9e34a2aeab6f8f0d4255.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-3c26d4b7e3608ed0ece4.js"],"component---src-pages-404-js":["/component---src-pages-404-js-4917da7ef5b541e98a81.js"],"component---src-pages-about-js":["/component---src-pages-about-js-b5804eba3d16afcb3700.js"],"component---src-pages-index-js":["/component---src-pages-index-js-bc882cd03f70c89c8148.js"],"component---src-templates-blog-template-js":["/component---src-templates-blog-template-js-ef83b594aa693e649d30.js"],"component---src-templates-category-template-js":["/component---src-templates-category-template-js-fea460fedd50cffb10cd.js"]};/*]]>*/</script><script src="/polyfill-cd840d73727c2e366b63.js" nomodule=""></script><script src="/component---src-templates-blog-template-js-ef83b594aa693e649d30.js" async=""></script><script src="/f9d3028dbef90a6e9b8db85387d63dd9f4edf538-3528d048b96f92ca0d99.js" async=""></script><script src="/app-9e34a2aeab6f8f0d4255.js" async=""></script><script src="/framework-0e1bf37de02f7cef2174.js" async=""></script><script src="/webpack-runtime-9dba177fcd04cde2dbcd.js" async=""></script></body></html>
