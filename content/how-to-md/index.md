@@ -68,7 +68,7 @@ h2까지는 밑줄선도 만들어주는 것 같아 보인다.
 사용할 언어를 첫 줄에 적어주면, 해당 언어에 맞게 들여쓰기나 색을 적용해준다.
 
 ```markdown
-​` javascript for(var i in array){ console.log("hello world!"); } ​`
+​` for(var i in array){ console.log("hello world!"); } ​`
 ```
 
 ```javascript

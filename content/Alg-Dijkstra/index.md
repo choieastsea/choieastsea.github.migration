@@ -42,7 +42,7 @@ weighted graph를 표현하는 방법은 크게 두가지로 나눠볼 수 있�
 
 2의 방법이 공간적으로 효율적이고 여러 엣지가 존재할 경우도 활용이 가능하다. `c++`에서는 pair와 vector배열을 이용하여 입력에 대하여 인접노드를 추가하는 형태로 표현할 수 있다. 
 
-```c++
+```cpp
 #include <bits/stdc++.h>
 #include <iostream>
 
@@ -94,7 +94,7 @@ int main(void)
 
 코드는 아래와 같다. 만약 endNode가 추가적으로 필요하다면, 인자에 추가하고 endNode탐색시 종료하면 된다.
 
-```c++
+```cpp
 void dijkstra(int startNode)
 {
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; // (weight, nodeNo)
@@ -137,7 +137,7 @@ void dijkstra(int startNode)
 
 그렇게 하면 1 -> 4 -> 3 -> 5의 경로로 최단경로가 확정될 때, [0, 1, 0, 5, 0, 3]와 같이 저장될 것이다. 이를 스택에다가 넣어서 출력하면 깔끔하게 나올 것이다. 최종 코드는 다음과 같다. `codeforces 20C`문제에 대한 코드이다.! 결국 다익스트라가 이러한 틀로 구성되니까 참고하면 좋을 것이다.
 
-```c++
+```cpp
 #include <bits/stdc++.h>
 #include <iostream>
 

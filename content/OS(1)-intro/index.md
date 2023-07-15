@@ -1,10 +1,11 @@
 ---
 emoji: 🙄
 title: (OS) 운영체제 복습 [1. 운영체제의 개요]
-date: '2022-06-26 00:00:00'
+date: '2023-06-26 00:00:00'
 author: choieastsea
 tags: OS os 
 categories: OS
+
 ---
 
 # 운영체제란?

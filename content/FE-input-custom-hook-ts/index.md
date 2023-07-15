@@ -83,7 +83,7 @@ react input component에 사용할 때,
 - custom hook을 호출하여 state, setState function, onChangeFunction을 할당받는다
 - input 태그에 value는 `state.field_name`, onChange는 `(e)=>onChangeFunction(e, 'field_name')`으로 적어준다.
 
-```react
+```javascript
 <input
 	placeholder="아이디"
 	value={signupObj.username}

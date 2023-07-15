@@ -209,7 +209,7 @@ connection.query('SELECT count from express', (error, rows) => {
 
 우선 DB에서 count 값을 가져와서 보여주려고 한다. react의 `useEffect` hook을 사용하여 렌더링될 때, DB에서 data값을 가져오도록 하였다. 
 
-```react
+```javascript
 //App.js
 const [count, setCount] = useState(null);
 useEffect(() => {
@@ -245,7 +245,7 @@ app.get("/api/get", async (req, res) => {
 
 우선 브라우저에서 plus 버튼이 눌리면 server에 함수를 호출하여 수정된 count값을 받아온다고 해준다.
 
-```react
+```javascript
 //App.js	
 <input
         type="button"
