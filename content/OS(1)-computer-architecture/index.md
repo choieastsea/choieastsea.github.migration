@@ -1,6 +1,6 @@
 ---
 emoji: 🙄
-title: (OS) 운영체제 복습 [2. 컴퓨터 구조 skim]
+title: (OS) 운영체제 복습 [1. 컴퓨터 구조 skim]
 date: '2023-06-27 00:00:00'
 author: choieastsea
 tags: OS os 
