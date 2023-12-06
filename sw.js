@@ -27,20 +27,20 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-2f09cb22d77301a11282.js"
+    "url": "webpack-runtime-865e1c72177f4491ea4c.js"
   },
   {
-    "url": "styles.ff8d70f869e37c9ed27b.css"
+    "url": "styles.403d7a8a431a9dbd54c6.css"
   },
   {
-    "url": "framework-0e1bf37de02f7cef2174.js"
+    "url": "framework-de157c6b30d4790e4e81.js"
   },
   {
-    "url": "app-d6caf7449d7587d63950.js"
+    "url": "app-b953dcec105c6228136b.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "f6e66a82cce9600b0a1093f9c3c65ea5"
+    "revision": "9431da3b141e721dc38331234680a95e"
   },
   {
     "url": "static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fBBc4.woff2"
@@ -52,14 +52,11 @@ self.__precacheManifest = [
     "url": "static/webfonts/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBBc4.woff2"
   },
   {
-    "url": "component---cache-caches-gatsby-plugin-offline-app-shell-js-3c26d4b7e3608ed0ece4.js"
-  },
-  {
-    "url": "polyfill-cd840d73727c2e366b63.js"
+    "url": "polyfill-f196834924f88edde8fc.js"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "aa3088509ac2809f94f2f4679e101171"
+    "revision": "56d832f13fcc2076bda2974918369030"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -85,6 +82,24 @@ const MessageAPI = {
 
   clearPathResources: event => {
     event.waitUntil(idbKeyval.clear())
+
+    // We detected compilation hash mismatch
+    // we should clear runtime cache as data
+    // files might be out of sync and we should
+    // do fresh fetches for them
+    event.waitUntil(
+      caches.keys().then(function (keyList) {
+        return Promise.all(
+          keyList.map(function (key) {
+            if (key && key.includes(`runtime`)) {
+              return caches.delete(key)
+            }
+
+            return Promise.resolve()
+          })
+        )
+      })
+    )
   },
 
   enableOfflineShell: () => {
@@ -151,7 +166,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-d6caf7449d7587d63950.js`))) {
+  if (!resources || !(await caches.match(`/app-b953dcec105c6228136b.js`))) {
     return await fetch(event.request)
   }
 
